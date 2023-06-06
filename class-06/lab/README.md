@@ -8,19 +8,19 @@ In network administration, you may encounter sub-optimal situations where two LA
 
 ## Scenario
 
-GlobeX has made a strategic acquisition and needs to share resources over a VPN tunnel. However, your manager wishes to obfuscate the corporate network architecture for security reasons. You've been tasked with working up a proof of concept as to how GlobeX can conceal the IP addresses of critical resources such as Windows Server.
+GlobeX has made a strategic acquisition and needs to share resources over a VPN tunnel. However, your manager wishes to obfuscate the corporate network architecture for security reasons. You've been tasked with working up a proof of concept as to how GlobeX can conceal the IP addresses of critical resources such as file servers.
 
 ## Prerequisites
 
 - Two networks with pfSense at the edge, connected via IPsec VPN
-- Windows 10 in the corporate network
-- Windows 10 in the external network
+- Windows 10 in the Corporate network
+- Windows 10 in the External network
 
 ## Objectives
 
-- Share a folder from Windows Server and test normal accessibility both from same LAN and from external network
-- Create a 1:1 NAT rule that alters the IP address of the Windows Server for hosts accessing it from over the VPN tunnel
-- Use 1:1 NAT to access the Windows Server shared folder from Windows 10 (external) without using Windows Server's real local IP address
+- Share a folder from the Windows 10 VM on the Corporate network and test normal accessibility both from same LAN and from External network
+- Create a 1:1 NAT rule that alters the IP address of the Corporate Windows 10 for hosts accessing it from over the VPN tunnel
+- Use 1:1 NAT to access the Corporate Windows 10 shared folder from External Windows 10  without using Coporate Windows 10's real local IP address
 
 ## Resources
 
@@ -39,13 +39,13 @@ Read through the entire lab and use Draw.io to create an appropriate topology of
 
 This lab requires that you've established a VPN tunnel between two pfSense networks in VirtualBox.
 
-- Share a folder on Windows Server.
-- From Windows 10 (internal), access the shared folder. Create a file. Include a screenshot of this operation.
-- From Windows 10 (external), access the shared folder via VPN. Create a file. Include a screenshot of this operation.
+- Share a folder on the Corporate Windows 10.
+- From another VM on the Corporate (internal) network, access the shared folder. Create a file. Include a screenshot of this operation.
+- From External Windows 10, access the shared folder via VPN. Create a file. Include a screenshot of this operation.
 
 ### Part 3: Configuring the Networks
 
-Now that we have established normal comms between the networks, and know that the file share is working, let's start experimenting with NAT. We can use a 1:1 NAT rule in pfSense to convert the IP address of our Windows Server for VPN users.
+Now that we have established normal comms between the networks, and know that the file share is working, let's start experimenting with NAT. We can use a 1:1 NAT rule in pfSense to convert the IP address of our Corporate Windows 10 for VPN users.
 
 - In pfSense, utilize 1:1 NAT to convert the file server IP to a different IP if accessed via VPN tunnel.
 - To accomplish this, you may need to configure other areas of pfSense such as Advanced Outbound NAT. Read up on documentation to explore how this can be achieved.
@@ -53,9 +53,9 @@ Now that we have established normal comms between the networks, and know that th
 
 ### Part 4: Testing
 
-Now let's test and verify that the NAT is translating the IP address correctly and that we can access the shared folder from Windows 10 (external).
+Now let's test and verify that the NAT is translating the IP address correctly and that we can access the shared folder from the External Windows 10.
 
-- Mount the file share on Windows 10 (external).
+- Mount the file share on the External Windows 10.
 - Include a screenshot of successfully accessing the file share in Windows Explorer.
 
 ### Part 5: Topology 2
