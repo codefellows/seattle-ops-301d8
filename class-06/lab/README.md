@@ -42,6 +42,7 @@ This lab requires that you've established a VPN tunnel between two pfSense netwo
 - Share a folder on the Corporate Windows 10.
 - From another VM on the Corporate (internal) network, access the shared folder. Create a file. Include a screenshot of this operation.
 - From External Windows 10, access the shared folder via VPN. Create a file. Include a screenshot of this operation.
+- On each Windows 10, [create a firewall rule to allow ICMP traffic](https://www.how2shout.com/how-to/allow-windows-10-ping-through-firewall-gui-powershell-netsh-command.html). This will make testing your network easier, and will help you diagnose problems with you network vs problems with the fileshare.
 
 ### Part 3: Configuring the Networks
 
