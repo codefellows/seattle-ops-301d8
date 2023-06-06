@@ -24,7 +24,7 @@ In Ubuntu, create a Python script that executes a few bash commands successfully
 Requirements:
 
 - The Python module "os" must be utilized
-- At least three variables must be declared in Python that contain results of bash operations
+- At least three variables must be declared and referenced in Python
 - The Python function print() must be used at least three times
 
 Include execution of the following bash commands inside your Python script:
