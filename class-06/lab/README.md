@@ -43,13 +43,14 @@ This lab requires that you've established a VPN tunnel between two pfSense netwo
 - From another VM on the Corporate (internal) network, access the shared folder. Create a file. Include a screenshot of this operation.
 - From External Windows 10, access the shared folder via VPN. Create a file. Include a screenshot of this operation.
 - On each Windows 10, [create a firewall rule to allow ICMP traffic](https://www.how2shout.com/how-to/allow-windows-10-ping-through-firewall-gui-powershell-netsh-command.html). This will make testing your network easier, and will help you diagnose problems with you network vs problems with the fileshare.
+> Hint: if you are having trouble accessing the shared folder, try disabling Windows Firewall.
 
 ### Part 3: Configuring the Networks
 
 Now that we have established normal comms between the networks, and know that the file share is working, let's start experimenting with NAT. We can use a 1:1 NAT rule in pfSense to convert the IP address of our Corporate Windows 10 for VPN users.
 
 - In pfSense, utilize 1:1 NAT to convert the file server IP to a different IP if accessed via VPN tunnel.
-- To accomplish this, you may need to configure other areas of pfSense such as Advanced Outbound NAT. Read up on documentation to explore how this can be achieved.
+- To accomplish this, you can use the 1:1 NAT features built into IPsec VPN in pfSense.
 - Include a screenshot of your configuration.
 
 ### Part 4: Testing
