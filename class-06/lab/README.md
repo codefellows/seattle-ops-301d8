@@ -13,7 +13,6 @@ GlobeX has made a strategic acquisition and needs to share resources over a VPN 
 ## Prerequisites
 
 - Two networks with pfSense at the edge, connected via IPsec VPN
-- Windows Server in the corporate network
 - Windows 10 in the corporate network
 - Windows 10 in the external network
 
@@ -32,7 +31,11 @@ GlobeX has made a strategic acquisition and needs to share resources over a VPN 
 
 ## Tasks
 
-### Part 1: Staging the Networks
+### Part 1: Topology 1
+
+Read through the entire lab and use Draw.io to create an appropriate topology of the network you expect to construct. Include as many details as you can such as computer names, OS types, IP addresses, etc. Include a screenshot of this initial topology.
+
+### Part 2: Staging the Networks
 
 This lab requires that you've established a VPN tunnel between two pfSense networks in VirtualBox.
 
@@ -40,7 +43,7 @@ This lab requires that you've established a VPN tunnel between two pfSense netwo
 - From Windows 10 (internal), access the shared folder. Create a file. Include a screenshot of this operation.
 - From Windows 10 (external), access the shared folder via VPN. Create a file. Include a screenshot of this operation.
 
-### Part 2: Configuring the Networks
+### Part 3: Configuring the Networks
 
 Now that we have established normal comms between the networks, and know that the file share is working, let's start experimenting with NAT. We can use a 1:1 NAT rule in pfSense to convert the IP address of our Windows Server for VPN users.
 
@@ -48,16 +51,18 @@ Now that we have established normal comms between the networks, and know that th
 - To accomplish this, you may need to configure other areas of pfSense such as Advanced Outbound NAT. Read up on documentation to explore how this can be achieved.
 - Include a screenshot of your configuration.
 
-### Part 3: Testing
+### Part 4: Testing
 
 Now let's test and verify that the NAT is translating the IP address correctly and that we can access the shared folder from Windows 10 (external).
 
 - Mount the file share on Windows 10 (external).
 - Include a screenshot of successfully accessing the file share in Windows Explorer.
 
-### Part 4: Topology
+### Part 5: Topology 2
 
-Update your network topology diagram with any changes made to your network.
+When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
+
+Was you initial topology accurate to the finished product? Why or why not?
 
 ## Submission Instructions
 
