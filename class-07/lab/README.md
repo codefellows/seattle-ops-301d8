@@ -27,7 +27,11 @@ GlobeX HR division wants to launch a new employee information website. This webs
 
 ## Tasks
 
-### Part 1: Ubuntu Server VM Deployment
+### Part 1: Topology 1
+
+Read through the entire lab and use Draw.io to create an appropriate topology of the network you expect to construct. Include as many details as you can such as computer names, OS types, IP addresses, etc. Include a screenshot of this initial topology.
+
+### Part 2: Ubuntu Server VM Deployment
 
 First you'll need to create a new VM behind pfSense. This will be a Linux system hosting NGINX.
 
@@ -39,7 +43,7 @@ First you'll need to create a new VM behind pfSense. This will be a Linux system
 - Reboot when installation is complete.
 - Connect to the server's CLI, either by shelling in from Kali or another VM on the same network as the server, or by using the VirtualBox display.
 
-### Part 2: NGINX Web Server Setup
+### Part 3: NGINX Web Server Setup
 
 In this step, you'll deploy an NGINX web server on Linux Server behind pfSense.
 
@@ -124,7 +128,7 @@ Complete the following steps:
        - This will overwrite the `index.html` file you created in step 3.
      - Access the web page using a browser (remember we used port 8000) and include a screenshot.
 
-### Part 3: Configuring pfSense
+### Part 4: Configuring pfSense
 
 Now that the web server is deployed, you'll need to configure the pfSense perimeter to redirect inbound HTTP requests to the new VM's IP address.
 
@@ -134,7 +138,7 @@ Now that the web server is deployed, you'll need to configure the pfSense perime
 - In Firewall > NAT, configure pfSense to route incoming HTTP requests on WAN port 80 to the NGINX web server port 8000.
 - Now that the web server has been deployed we can access the web server from outside the network on a device that's also set to NAT Network.
 
-### Part 4: Testing
+### Part 5: Testing
 
 - Identify your pfSense's WAN address on its main dashboard screen towards the bottom right. You'll need it for the upcoming step.
 - Move Kali Linux outside the LAN by setting its network adapter to NAT Network.
@@ -144,9 +148,11 @@ Now that the web server is deployed, you'll need to configure the pfSense perime
 
 Congratulations! You've set up your first web server properly behind a firewall.
 
-### Part 5: Topology
+### Part 5: Topology 2
 
-- Update your network topology in draw.io and include in your submission.
+When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
+
+Was your initial topology accurate to the finished product? Why or why not?
 
 ## Stretch Goals (Optional Objectives)
 
