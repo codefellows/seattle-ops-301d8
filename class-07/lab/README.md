@@ -8,6 +8,11 @@ Infrastructure deployment is an important role for the systems administrator. Pu
 
 GlobeX HR division wants to launch a new employee information website. This website will be public-facing, as it does not contain sensitive information, but rather helpful information about the various services available to employees. You've joined the project team and are tasked with standing up some prototype infrastructure for the web developer to work with. "All I know is Wordpress!" the web developer exclaims. "If you can get me a web server and remote access to it, I'll be all set to begin front-end development."
 
+## Prerequisites
+
+- A pfSense VM, free from configuration settings from previous labs
+- 
+
 ## Objectives
 
 - Deploy an NGINX web server on Linux Server behind pfSense
@@ -31,17 +36,23 @@ GlobeX HR division wants to launch a new employee information website. This webs
 
 Read through the entire lab and use Draw.io to create an appropriate topology of the network you expect to construct. Include as many details as you can such as computer names, OS types, IP addresses, etc. Include a screenshot of this initial topology.
 
-### Part 2: Ubuntu Server VM Deployment
+### Part 2: Staging
 
-First you'll need to create a new VM behind pfSense. This will be a Linux system hosting NGINX.
+First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
 
-- Download the Ubuntu Server ISO.
+On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
+
+Second you'll need to create a new Ubuntu Server VM behind pfSense. This VM will host NGINX and be a webserver.
+
+- Download the [Ubuntu Server ISO](https://ubuntu.com/download/server).
 - Create a new VM in VirtualBox.
   - Specify the network adapter to connect to your pfSense using the "Internal Network" option.
 - Install the latest version of Ubuntu Server.
   - Install OpenSSH during the OS installation process.
 - Reboot when installation is complete.
 - Connect to the server's CLI, either by shelling in from Kali or another VM on the same network as the server, or by using the VirtualBox display.
+
+You will also need a VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the webserver.
 
 ### Part 3: NGINX Web Server Setup
 
@@ -115,6 +126,8 @@ Complete the following steps:
       `sudo systemctl status nginx`
      - If it is not running, start it with:
       `sudo systemctl start nginx`
+     - If it is already running, you may need to restart it with:
+       `sudo systemctl restart nginx`
      - Open up ports 22, 8000 on UFW.
        - Activate the Ubuntu Server's UFW.
        - Include a screenshot of UFW settings while you're shelled into Ubuntu Server.
@@ -148,7 +161,7 @@ Now that the web server is deployed, you'll need to configure the pfSense perime
 
 Congratulations! You've set up your first web server properly behind a firewall.
 
-### Part 5: Topology 2
+### Part 6: Topology 2
 
 When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
 
