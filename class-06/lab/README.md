@@ -64,7 +64,7 @@ Now let's test and verify that the NAT is translating the IP address correctly a
 
 When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
 
-Was you initial topology accurate to the finished product? Why or why not?
+Was your initial topology accurate to the finished product? Why or why not?
 
 ## Submission Instructions
 
