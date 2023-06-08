@@ -28,7 +28,7 @@ GlobeX HR division wants to launch a new employee information website. This webs
 
 - [Ubuntu Server Download](https://ubuntu.com/download/server){:target="_blank"}
 - [Ubuntu Official Documentation - Install NGINX](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview){:target="_blank"}
-- [PfSense Port Forwarding]([https://serverspace.io/support/help/routing-in-pfsense-port-forwarding/](https://docs.netgate.com/pfsense/en/latest/nat/port-forwards.html)){:target="_blank"}
+- [PfSense Port Forwarding](https://docs.netgate.com/pfsense/en/latest/nat/port-forwards.html){:target="_blank"}
 
 ## Tasks
 
