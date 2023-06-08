@@ -10,8 +10,8 @@ GlobeX HR division wants to launch a new employee information website. This webs
 
 ## Prerequisites
 
-- A pfSense VM, free from configuration settings from previous labs
-- 
+- A pfSense VM in VirtualBox, free from configuration settings from previous labs
+- A user endpoint VM in VirtualBox (any existing Windows 10 or Linux VM)
 
 ## Objectives
 
@@ -38,21 +38,22 @@ Read through the entire lab and use Draw.io to create an appropriate topology of
 
 ### Part 2: Staging
 
-First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
+Submit detailed documentation regarding all of the configurations in this section.
 
-On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
+1. First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
 
-Second you'll need to create a new Ubuntu Server VM behind pfSense. This VM will host NGINX and be a webserver.
+    On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
 
-- Download the [Ubuntu Server ISO](https://ubuntu.com/download/server).
-- Create a new VM in VirtualBox.
-  - Specify the network adapter to connect to your pfSense using the "Internal Network" option.
-- Install the latest version of Ubuntu Server.
-  - Install OpenSSH during the OS installation process.
-- Reboot when installation is complete.
-- Connect to the server's CLI, either by shelling in from Kali or another VM on the same network as the server, or by using the VirtualBox display.
+2. Second you'll need to create a new Ubuntu Server VM behind pfSense. This VM will host NGINX and be a webserver.
 
-You will also need a VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the webserver.
+    - Download the [Ubuntu Server ISO](https://ubuntu.com/download/server).
+    - Create a new VM in VirtualBox.
+      - Specify the network adapter to connect to your pfSense using the "Internal Network" option.
+    - Install the latest version of Ubuntu Server.
+      - Install OpenSSH during the OS installation process.
+    - Reboot when installation is complete.
+
+3. Finally, you will also need a VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the webserver.
 
 ### Part 3: NGINX Web Server Setup
 
