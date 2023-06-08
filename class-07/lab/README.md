@@ -42,7 +42,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
 
 1. First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
 
-    On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
+    On the pfSense VM, configure the WAN network adapter to NAT Network and the LAN adapter to Internal Network.
 
 2. Second you will need to create a new Ubuntu Server VM behind pfSense. This VM will host NGINX and be a webserver.
 
@@ -52,8 +52,12 @@ Submit detailed documentation regarding all of the configurations in this sectio
     - Install the latest version of Ubuntu Server.
       - Install OpenSSH during the OS installation process.
     - Reboot when installation is complete.
+    
+    On the Ubuntu Server VM, configure the network adapter to match the LAN adapter of pfSense (should be set to the same Internal Network).
 
 3. Finally, you will also need a user endpoint VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the webserver.
+
+    On the user endpoint VM, configure the network adapter to match the LAN adapter of pfSense (should be set to the same Internal Network).
 
 ### Part 3: NGINX Web Server Setup
 
