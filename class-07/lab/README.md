@@ -44,7 +44,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
 
     On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
 
-2. Second you'll need to create a new Ubuntu Server VM behind pfSense. This VM will host NGINX and be a webserver.
+2. Second you will need to create a new Ubuntu Server VM behind pfSense. This VM will host NGINX and be a webserver.
 
     - Download the [Ubuntu Server ISO](https://ubuntu.com/download/server).
     - Create a new VM in VirtualBox.
@@ -53,7 +53,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
       - Install OpenSSH during the OS installation process.
     - Reboot when installation is complete.
 
-3. Finally, you will also need a VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the webserver.
+3. Finally, you will also need a user endpoint VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the webserver.
 
 ### Part 3: NGINX Web Server Setup
 
