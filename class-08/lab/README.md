@@ -41,18 +41,13 @@ Read through the entire lab and use Draw.io to create an appropriate topology of
 
 Submit detailed documentation regarding all of the configurations in this section.
 
-- Backup your pfSense appliance
-- On your pfSense appliance, set the WAN interface to NAT Network and the LAN interface to Internal Network
-- Place your Kali VM or a Windows 10 VM on the same Internal Network
-  - Refresh this VM's dhcp lease as necessary, and ensure that you can access the pfSense web configuration GUI
-
-Submit detailed documentation regarding all of the configurations in this section.
-
 1. First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
 
-    On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
+    On the pfSense VM, configure the WAN network adapter to NAT Network and the LAN adapter to Internal Network.
 
 2. Second you will need a user endpoint VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the Captive Portal.
+
+    On the user endpoint VM, configure the network adapter to match the LAN adapter of pfSense (should be set to the same Internal Network).
 
 ### Part 3a: Captive Portal
 
