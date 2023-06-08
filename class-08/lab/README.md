@@ -10,10 +10,8 @@ GlobeX's MSSP, Secutronix, informed you this morning that a network intrusion wa
 
 ## Prerequisites
 
-- pfSense deployed as a VM in VirtualBox
-  - WAN interface set to NAT Network
-- User endpoint VM in VirtualBox (any Windows or Linux machine you have ready)
-  - Set network adapter to the pfSense LAN interface
+- A pfSense VM in VirtualBox, free from configuration settings from previous labs
+- A user endpoint VM in VirtualBox (any existing Windows 10 or Linux VM)
 
 ## Objectives
 
@@ -35,7 +33,11 @@ GlobeX's MSSP, Secutronix, informed you this morning that a network intrusion wa
 
 Be sure to carefully document all configuration settings and passwords used in this lab.
 
-### Part 1: Setup
+### Part 1: Topology 1
+
+Read through the entire lab and use Draw.io to create an appropriate topology of the network you expect to construct. Include as many details as you can such as computer names, OS types, IP addresses, etc. Include a screenshot of this initial topology.
+
+### Part 2: Staging
 
 Submit detailed documentation regarding all of the configurations in this section.
 
@@ -44,7 +46,15 @@ Submit detailed documentation regarding all of the configurations in this sectio
 - Place your Kali VM or a Windows 10 VM on the same Internal Network
   - Refresh this VM's dhcp lease as necessary, and ensure that you can access the pfSense web configuration GUI
 
-### Part 2a: Captive Portal
+Submit detailed documentation regarding all of the configurations in this section.
+
+1. First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
+
+    On the pfSense VM, configure the WAN network interface to NAT Network and the LAN interface to Internal Network.
+
+2. Second you will need a user endpoint VM with a GUI (Windows 10 or Kali) for configuring pfSense and testing the Captive Portal.
+
+### Part 3a: Captive Portal
 
 Submit detailed documentation regarding all of the configurations in this section.
 
@@ -57,7 +67,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
 - Attempt to login to the portal
 - Navigate to Status / Captive Portal and disconnect the host
 
-### Part 2b: Captive Portal Authentication
+### Part 3b: Captive Portal Authentication
 
 Submit detailed documentation regarding all of the configurations in this section.
 
@@ -73,7 +83,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
 - Why did the captive portal change? How is pfSense authenticating this user?
 - Can you use the pfSense admin user to access the portal as well? Why or why not?
 
-### Part 3: Deploy FreeRADIUS
+### Part 4: Deploy FreeRADIUS
 
 Submit detailed documentation regarding all of the configurations in this section.
 
@@ -89,7 +99,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
   - Shared Secret: the same as above
 - In Diagnostics > Authentication, test the new FreeRADIUS user you just created to confirm it is working
 
-### Part 4: Integrating FreeRADIUS with Captive Portal
+### Part 5: Integrating FreeRADIUS with Captive Portal
 
 Next, let's try and integrate FreeRADIUS.
 Submit detailed documentation regarding all of the configurations in this section.
@@ -98,7 +108,7 @@ Submit detailed documentation regarding all of the configurations in this sectio
 - Try logging in with the pfSense local user you created in Part 2b -- were you able to log in? Why or why not?
 - Try logging in with the FreeRADIUS user you just created -- did it work? Why or why not?
 
-### Part 5: Logs
+### Part 6: Logs
 
 As with any system you deploy be prepared to troubleshoot it!
 
@@ -116,6 +126,13 @@ As with any system you deploy be prepared to troubleshoot it!
   - Explain in your own words how this RADIUS configuration facilitates AAA management
 
 Submit detailed documentation regarding all of the above configurations.
+
+
+### Part 7: Topology 2
+
+When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
+
+Was your initial topology accurate to the finished product? Why or why not?
 
 ## Stretch Goals (Optional Objectives)
 
