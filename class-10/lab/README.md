@@ -8,12 +8,9 @@ Networking in the AWS cloud differs substantially from traditional on-prem LANs.
 
 GlobeX is considering moving some of their infrastructure to the AWS cloud. You have been tasked with creating GlobeX's first VPC, two subnets, two EC2 instances and an Internet Gateway.
 
-## Resources
+## Prerequisites
 
-- [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html){:target="_blank"}
-- [Default VPC and default subnets](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html){:target="_blank"}
-- [Draw.io AWS Icon Library](https://app.diagrams.net/?libs=aws2){:target="_blank"}
-- [Example AWS topology](https://randops.org/2016/12/18/aws-diagrams-with-draw-io/){:target="_blank"}
+- An account with Amazon Web Services (AWS) and a valid form of payment (don't worry, you shouldn't generate more than a few dollars)
 
 ## Objectives
 
@@ -23,9 +20,20 @@ GlobeX is considering moving some of their infrastructure to the AWS cloud. You 
 - Create an Internet Gateway
 - Depict the topology in a diagram
 
+## Resources
+
+- [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html){:target="_blank"}
+- [Default VPC and default subnets](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html){:target="_blank"}
+- [Draw.io AWS Icon Library](https://app.diagrams.net/?libs=aws2){:target="_blank"}
+- [Example AWS topology](https://randops.org/2016/12/18/aws-diagrams-with-draw-io/){:target="_blank"}
+
 ## Tasks
 
-### Part 1: Creating a VPC
+### Part 1: Topology 1
+
+Read through the entire lab and use Draw.io to create an appropriate topology of the network you expect to construct. Include as many details as you can such as computer names, OS types, IP addresses, etc. Include a screenshot of this initial topology.
+
+### Part 2: Creating a VPC
 
 For this lab, you'll be creating a VPC on AWS. A VPC is a virtual network withing the AWS Cloud. A VPC allows you to provision your own isolated section of AWS, very similar to designing and implementing a separate independent network in an on-premises data center.
 
@@ -38,7 +46,7 @@ For this lab, you'll be creating a VPC on AWS. A VPC is a virtual network within
 
 Include a screenshot of your VPC configuration screen in your submission.
 
-### Part 2: Create VPC subnets
+### Part 3: Create VPC subnets
 
 Next, create one public subnet and one private subnet.
 
@@ -72,7 +80,7 @@ On the subnet page in the VPC console select the Subnet you just created.
 
 Include a screenshot of your subnet configuration screens in your submission.
 
-### Part 3: Create an Internet gateway (IGW)
+### Part 4: Create an Internet gateway (IGW)
 
 - In the left navigation pane, choose **Internet Gateways** > **Create internet gateway**
   - **Name tag**: `IGW-LAB10`
@@ -97,7 +105,7 @@ Include a screenshot of your subnet configuration screens in your submission.
 Include a screenshot of your IGW and route table configuration screen in your submission.
 
 
-### Part 4: Create Security Groups for subnets
+### Part 5: Create Security Groups for subnets
 
 **Create Security Group for public subnet**
 
@@ -126,7 +134,7 @@ Include a screenshot of your IGW and route table configuration screen in your su
 Include a screenshot of your Security Groups configuration screens in your submission.
 
 
-### Part 5: Create EC2 Instances
+### Part 6: Create EC2 Instances
 
 **Create EC2 on public subnet**
 
@@ -164,7 +172,7 @@ Include a screenshot of your Security Groups configuration screens in your submi
 
 Include a screenshot of your EC2 configuration screens in your submission.
 
-### Part 6: Testing Connectivity
+### Part 7: Testing Connectivity
 
 - Try to ping and SSH to the instance in the public subnet `PUB-SUBNET-LAB10`
   - Were these tests successful and if so, why or why not?
@@ -172,6 +180,12 @@ Include a screenshot of your EC2 configuration screens in your submission.
   - Were these tests successful and if so why or why not?
 
 Include a screenshot of your ping and SSH results in your submission.
+
+### Part 8: Topology 2
+
+When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
+
+Was your initial topology accurate to the finished product? Why or why not?
 
 ## Stretch goals (Optional Objectives)
 
