@@ -79,34 +79,34 @@ Now we are going to configure our Windows Server 2019 VM on the Network.
 
 7. At this point, take a snapshot of your VM and export an OVA backup. Document where you have saved this backup and what you have named it.
 
-### Part 4: DNS
+### Part 4: Activate and configure DNS
 
-Activate roles:
-- DNS
-- AD DC
+Tomorrow we will activate and configure Active Directory (AD), create a Domain, and promote Windows Server to be the Domain Controller (DC).
 
+But in order for AD and DC to function properly, we'll need to configure Windows Server to act as the DNS server for this LAN instead of pfSense. Ideally, pfSense should be configured to be aware that Windows Server's IP address is the DNS of this network.
 
+1. First we will activate the DNS role on Windows Server and test it locally:
 
-In order for AD and DC to function properly, we'll need to configure Windows Server to act as the DNS server for this LAN instead of pfSense. Ideally, pfSense should be configured to be aware that Windows Server's IP address is the DNS of this network.
+    - Activate the DNS role on Windows Server using Server Manager
 
-- First, activate the DNS role on Windows Server using Server Manager.
-- Next, you'll need to point your network hosts to it as their DNS server. Configure pfSense to assign the DNS server for LAN hosts to use this Windows Server's IP address if possible; otherwise, you can manually assign DNS server IP via the Windows Server/Windows 10 network adapter settings.
-- Verify that all devices have working DNS through Windows Server and can browse the internet.
-- Test your DNS is working by applying a forward lookup zone. Create a new forward lookup that causes http://admin.globexpower.com to resolve as the IP address of pfSense.
+    - In Windows Server, change the DNS address to 127.0.0.1, so that Windows Server will use itself for DNS resolution
 
-### Part 5: Active Directory
+    - Test your DNS is working by applying a forward lookup zone:
+        - Create a new forward lookup that causes admin.globex.com to resolve as the IP address of pfSense
+        - Test that lookup zone by running `nslookup admin.globex.com` in the command line -- it should resolve as the address of pfSense
+        - Use Internet Expolorer to navigate to http://admin.globex.com -- IE can be a little difficult, but if it works you should see pfSense load with a big red error warning you of a "Potential DNS rebind attack"
+    
+2. Configure pfSense to assign DNS server information along with DHCP IP assignment:
 
-Activate AD DS role on Windows Server.
+    - Add the static IP of the Windows Server in Services / DHCP Server / Lan, in the first 'DNS servers' text field
+    
+    - On Windows 10, run `ipconfig /all` and note the IP address for DNS Server
+   
+    - On Windows 10, run `ipconfig /release`, then `ipconfig /renew`, then `ipconfig /all` again, and note the IP address for DNS Server -- it should now have changed to the static IP of the Windows Server
+    
+    - Test this by using `nslookup` and the browser to evaluate admin.globex.com
 
-- Install server roles:
-  - Active Directory Domain Services.
-- Promote this server to a Domain Controller.
-- Add a new forest. It's OK if your forest only has one tree.
-  - Create a local domain using `corp.globexpower.com` as the root domain name.
-- Set a DSRM password.
-- Set the NetBIOS name to `CORP`.
-
-### Part 6: Topology 2
+### Part 5: Topology 2
 
 When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
 
