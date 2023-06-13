@@ -1,4 +1,4 @@
-# Lab: Windows Server
+# Lab: Windows Server and Domain Controller
 
 ## Overview
 
@@ -6,79 +6,111 @@ Microsoft Windows Server is an OS that facilitates the hosting of critical autho
 
 ## Scenario
 
-GlobeX LLC is a small startup in Springfield, OR with big dreams. According to its founder and CEO, Keytron Rusk, its mission is "to manufacture and deliver cutting edge products that contribute to sustainable, renewable energy." By harnessing scientific breakthroughs made by [Belgian scientists in 2017](https://www.mic.com/articles/176543/scientists-figured-out-how-to-convert-polluted-air-into-clean-energy){:target="_blank"}, GlobeX steadily developed international clientele with its groundbreaking AirPower machines that converted CO2 emissions and other toxins in the air to a source of electrical energy. The company is now making aggressive acquisitions and expansions in strategic areas of the world.
+After performing your initial survey of GlobeX systems, you gather that the company mostly runs virtual Windows 10 Professional 64-bit endpoints. However, GlobeX computer systems are inconsistently configured, resulting in a high rate of data loss, regulatory compliance violations and operational dissatisfaction. Your task is to deploy Windows Server to the LAN so that the process of migrating from Workgroup to Domain can begin.
 
-GlobeX is now at a technological crossroads with its IT infrastructure; it must either adapt its systems to modern standards, or be held back by its antiquated internal practices and expose itself to higher levels of risk. You have been hired at GlobeX as the new Systems Administrator reporting directly to Mr. Rusk. You will be responsible for both critical IT systems administration and network operations in this exciting new role.
+## Prerequisites
 
-After performing your initial survey of GlobeX systems, you gather that the company mostly runs virtual Windows 10 Professional 64-bit endpoints. However, GlobeX computer systems are inconsistently configured, resulting in a high rate of data loss, regulatory compliance violations and operational dissatisfaction. Your first task is to deploy Windows Server to the LAN so that the process of migrating from Workgroup to Domain can begin. You'll need to shop for one within the company's budgetary constraints, then deploy it.
+- A pfSense VM in VirtualBox, free from configuration settings from previous labs
+- A user endpoint VM in VirtualBox (any existing Windows 10 or Linux VM)
+
+## Objectives
+
+- Deploy Windows Server 2019 as a VM to your local VirtualBox Manager and add it to your network
+- Assign the VM a static IP using DHCP reservation on your pfSense VM
+- Verify connectivity from Windows Server to Windows 10 and to the internet
+- 
+- Create a professional network topology diagram that reflects your current deployments
 
 ## Resources
 
 - [Windows Server 2019 ISO Download](https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2019?filetype=ISO){:target="_blank"}
 - [Windows 10 ISO Download](https://www.icloud.com/iclouddrive/01azgWsJOfzZaBbAj-G3sLWTg#Windows10){:target="_blank"}
 - [AD DS Installation and Removal Wizard Page Descriptions](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/ad-ds-installation-and-removal-wizard-page-descriptions){:target="_blank"}
-
-## Prerequisites
-
-- Deploy pfSense router/firewall as a FreeBSD VM to your local VirtualBox Manager. This is performed in previous courses.
-- Deploy a Windows 10 VM to your local VirtualBox Manager. This is performed in previous courses.
-
-## Objectives
-
-- Shop online for a server priced below $500 and discuss why you chose it. (Purchase not required!)
-- Deploy Windows Server 2019 as a VM to your local VirtualBox Manager.
-- Virtually plug the Windows Server VM into the pfSense VM. This should be the same LAN subnet as your Windows 10 PC.
-- Assign the VM a static IP using DHCP reservation on your pfSense VM.
-- Verify connectivity from Windows Server to Windows 10.
-- Disable enhanced security feature on Internet Explorer in Windows Server.
-- Verify internet connectivity on Windows Server.
-- Perform Windows Update on the server until it is fully patched to latest possible version.
-- Create a professional network topology diagram that reflects your current deployments.
+- [Microsoft Documentation - Install or Uninstall Roles, Role Services, or Features](https://docs.microsoft.com/en-us/windows-server/administration/server-manager/install-or-uninstall-roles-role-services-or-features){:target="_blank"}
+- [How to create a Windows Domain and AD](https://www.informaticar.net/server-basics-06-how-to-create-windows-domain-active-directory/){:target="_blank"}
 
 ## Tasks
 
 Today you'll be deploying Windows Server 2019 as part of the project to transition GlobeX from Workgroup to Domain on its network.
 
-### Part 1: Server Shopping
+### Part 1: Topology 1
 
-- Choose a rack mount server for sale on the internet that costs less than $5,000. What's the best deal out there for GlobeX and why did you choose the one you did?
-  - List out the specs of the server you found (RAM, CPU, Storage, etc.)
-  - Given the budget, what would be the pros and cons for Globex to purchase the server hardware instead of using a cloud provider.
+Read through the entire lab and use Draw.io to create an appropriate topology of the network you expect to construct. Include as many details as you can such as computer names, OS types, IP addresses, etc. Include a screenshot of this initial topology.
 
-> No need to actually purchase a rack mount server for yourself, but you can if you want to!
+### Part 2: Staging
 
-### Part 2: Server Deployment
+Submit detailed documentation regarding all of the configurations in this section.
 
-- Deploy Windows Server 2019 as a VM to your local VirtualBox Manager.
-  - Create a new VM. Document the CPU, RAM, and storage allocations you've made to this VM.
-  - Start by downloading the installer ISO and booting into it.
-  - During installation, select "Windows Server 2019 Standard Evaluation (Desktop Experience)"
-  - You'll need to select partitioning just like a Win 10 installation.
-- When the OS is installed, export it to an OVA in case you need to start fresh on this OS again.
-- Install VirtualBox Guest Additions for this VM for optimal interactivity
+1. First you will need a fresh pfSense VM, free from configuration settings from previous labs. You can reset an existing instance to factory settings (Diagnostics / Factory Defaults), revert to a baseline snapshot, import a fresh instance from a baseline OVA backup, or by installing pfSense on a new VM. However you achieve this, it is important to start from a clean baseline to avoid complications.
 
-### Part 3: Network Connectivity
+    - On the pfSense VM, configure the WAN network adapter to NAT Network and the LAN adapter to Internal Network.
 
-- Virtually plug the Windows Server VM into the pfSense VM. This should be the same LAN subnet as your Windows 10 PC.
-- Assign the VM a static IP using DHCP reservation on your pfSense VM.
-  - Document the DHCP range.
-  - Document the reserved IP you've allocated for the Windows Server. Why did you choose this IP, and what are your plans for future reserved IPs on this subnet? Explain how you'll reserve them.
-  - Document the IP of Windows 10 VM. Did you also reserve it an IP (optional)? Explain your reasoning as if this were a production (real) network environment.
-- Verify connectivity from Windows Server to Windows 10.
-- Disable enhanced security feature on Internet Explorer in Windows Server.
-- Verify internet connectivity on Windows Server using its Internet Explorer/Edge browser.
+2. Second you will need a Windows 10 endpoint VM.
 
-### Part 5: Updates
+    - On the Windows 10 VM, configure the network adapter to match the LAN adapter of pfSense (should be set to the same Internal Network).
+    
+3. Third, deploy a new Windows Server 2019 VM.
 
-- Perform Windows Update on the server until it is fully patched to latest possible version.
+    - Create a new VM. Document the CPU, RAM, and storage allocations you've made to this VM.
 
-### Part 6: Topology
+        - Configure the network adapter to match the LAN adapter of pfSense (should be set to the same Internal Network).
 
-- Create a professional network topology diagram that reflects your current deployments of the following assets:
-  - PfSense router/firewall
-  - Windows Server 2019
-  - Windows 10
-- Include IP address, OS, and computer name of each host near its icon.
+    - Download the [Windows Server 2019 ISO](https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2019?filetype=ISO) to your lab computer and install the OS on the VM.
+
+        - During installation, select "Windows Server 2019 Standard Evaluation (Desktop Experience)"
+
+### Part 3: Network Connectivity, Configuration, and updates
+
+Now we are going to configure our Windows Server 2019 VM on the Network.
+
+1. Connect to pfSense from your Windows 10 VM and confirm that the Windows Server has been assigned an IP address by checking Status / DHCP Leases. Document both the DHCP range in pfSense and the current leases.
+
+2. Next, assign the Windows Server 2019 VM a static IP using DHCP reservation on your pfSense VM. Document the reserved IP you've allocated to the server.
+
+    - Why did you choose this IP, and what are your plans for future reserved IPs on this subnet?
+
+3. Verify connectivity from Windows Server to Windows 10.
+
+4. Disable enhanced security feature on Internet Explorer in Windows Server.
+
+5. Verify internet connectivity on Windows Server using its Internet Explorer/Edge browser.
+
+6. Perform Windows Update on the server until it is fully patched to latest possible version.
+
+7. At this point, take a snapshot of your VM and export an OVA backup. Document where you have saved this backup and what you have named it.
+
+### Part 4: Activate and configure DNS
+
+Tomorrow we will activate and configure Active Directory (AD), create a Domain, and promote Windows Server to be the Domain Controller (DC).
+
+But in order for AD and DC to function properly, we'll need to configure Windows Server to act as the DNS server for this LAN instead of pfSense. Ideally, pfSense should be configured to be aware that Windows Server's IP address is the DNS of this network.
+
+1. First we will activate the DNS role on Windows Server and test it locally:
+
+    - Activate the DNS role on Windows Server using Server Manager
+
+    - In Windows Server, change the DNS address to 127.0.0.1, so that Windows Server will use itself for DNS resolution
+
+    - Test your DNS is working by applying a forward lookup zone:
+        - Create a new forward lookup that causes admin.globex.com to resolve as the IP address of pfSense
+        - Test that lookup zone by running `nslookup admin.globex.com` in the command line -- it should resolve as the address of pfSense
+        - Use Internet Expolorer to navigate to http://admin.globex.com -- IE can be a little difficult, but if it works you should see pfSense load with a big red error warning you of a "Potential DNS rebind attack"
+    
+2. Configure pfSense to assign DNS server information along with DHCP IP assignment:
+
+    - Add the static IP of the Windows Server in Services / DHCP Server / Lan, in the first 'DNS servers' text field
+    
+    - On Windows 10, run `ipconfig /all` and note the IP address for DNS Server
+   
+    - On Windows 10, run `ipconfig /release`, then `ipconfig /renew`, then `ipconfig /all` again, and note the IP address for DNS Server -- it should now have changed to the static IP of the Windows Server
+    
+    - Test this by using `nslookup` and the browser to evaluate admin.globex.com
+
+### Part 5: Topology 2
+
+When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
+
+Was your initial topology accurate to the finished product? Why or why not?
 
 ## Submission Instructions
 
