@@ -75,7 +75,7 @@ Now we are going to configure our Windows Server 2019 VM on the Network.
 
 5. Verify internet connectivity on Windows Server using its Internet Explorer/Edge browser.
 
-6. Perform Windows Update on the server until it is fully patched to latest possible version.
+6. Optional: Perform Windows Update on the server until it is fully patched to latest possible version.
 
 7. At this point, take a snapshot of your VM and export an OVA backup. Document where you have saved this backup and what you have named it.
 
