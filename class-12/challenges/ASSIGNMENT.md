@@ -25,7 +25,7 @@ Create a Python script that performs the following:
 
 - Print to the screen the entire request your script is about to send. Ask the user to confirm before proceeding.
 
-- Using the `requests` library, perform a `GET` request against your lab web server.
+- Using the `requests` library, perform a request against the destination URL with the HTTP Method selected by the user.
 
 - For the given header, translate the codes into plain terms that print to the screen; for example, a `404` error should print `Site not found` to the terminal instead of `404`.
 
