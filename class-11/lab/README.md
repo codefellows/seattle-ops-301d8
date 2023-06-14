@@ -25,9 +25,10 @@ After performing your initial survey of GlobeX systems, you gather that the comp
 
 - [Windows Server 2019 ISO Download](https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2019?filetype=ISO){:target="_blank"}
 - [Windows 10 ISO Download](https://www.icloud.com/iclouddrive/01azgWsJOfzZaBbAj-G3sLWTg#Windows10){:target="_blank"}
-- [AD DS Installation and Removal Wizard Page Descriptions](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/ad-ds-installation-and-removal-wizard-page-descriptions){:target="_blank"}
 - [Microsoft Documentation - Install or Uninstall Roles, Role Services, or Features](https://docs.microsoft.com/en-us/windows-server/administration/server-manager/install-or-uninstall-roles-role-services-or-features){:target="_blank"}
-- [How to create a Windows Domain and AD](https://www.informaticar.net/server-basics-06-how-to-create-windows-domain-active-directory/){:target="_blank"}
+- [Microsoft Documentation - Domain Name Services (DNS)](https://learn.microsoft.com/en-us/windows-server/networking/dns/dns-top)
+- [Microsoft Documentation - Overview of DNS zones and records](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records)
+
 
 ## Tasks
 
