@@ -8,62 +8,84 @@ During deployment of Windows Server one of the first steps is to assign it the c
 
 The GlobeX CEO has requested that endpoint configuration be centrally administered along with other critical services. "I've got sales reps losing customer data to random Windows updates!" he fumes. "This is unacceptable; how does anyone get any work done with these kinds of interruptions? I'm really hoping you can get our computers configured to some kind of standard."
 
-As part of your project to transition GlobeX from Workgroup to Domain, the next step is to configure the new Windows Server so that it can perform these critical roles on the GlobeX network.
+As part of your project to transition GlobeX from Workgroup to Domain, the next step is to configure the new Windows Server so that it can perform these critical roles on the GlobeX network, then start creating users and joining endpoints to the domain.
 
 ## Objectives
 
-- Add the following roles to your Windows Server:
-  - DC
-  - AD
-  - DNS
-- Create a DNS entry in the forward lookup zone that changes how a domain name resolves.
-- Promote this server to a Domain Controller (DC).
-- Add a new forest and create a local domain, `corp.globexpower.com`, with a NetBIOS of `CORP`.
-- Install BgInfo on the Windows Server.
-- Update your network topology diagram with any changes made to your network.
+- Add the AD DS role to your Windows Server
+- Promote this server to a Domain Controller (DC)
+- Add a new forest and create a local domain, `corp.globex.com`, with a NetBIOS of `CORP`
+- Join the Windows 10 endpoint to the newly-created domain
+- Configure ADAC on the Windows 10 endpoint for use by the systems administrator
+- Create user accounts on ADAC
+- Create OUs by department
+- Sign into the Windows 10 endpoint using each AD profile
+
 
 ## Resources
 
 - [Microsoft Documentation - Install or Uninstall Roles, Role Services, or Features](https://docs.microsoft.com/en-us/windows-server/administration/server-manager/install-or-uninstall-roles-role-services-or-features){:target="_blank"}
+- [AD DS Installation and Removal Wizard Page Descriptions](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/ad-ds-installation-and-removal-wizard-page-descriptions){:target="_blank"}
 - [How to create a Windows Domain and AD](https://www.informaticar.net/server-basics-06-how-to-create-windows-domain-active-directory/){:target="_blank"}
+- [Microsoft Documentation - Active Directory Administrative Center](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/adac/active-directory-administrative-center){:target="_blank"}
+- [Join Windows 10 to a Domain](https://www.itechguides.com/join-windows-10-to-domain/){:target="_blank"}
+- [How to Install And Use Active Directory Administrative Center (ADAC](https://blog.netwrix.com/2023/05/26/how-to-install-active-directory-administrative-center/)
 
 ## Tasks
 
-### Part 1: DNS
+### Part 1: Topology 1
 
-In order for AD and DC to function properly, we'll need to configure Windows Server to act as the DNS server for this LAN instead of pfSense. Ideally, pfSense should be configured to be aware that Windows Server's IP address is the DNS of this network.
+1. In Draw.io, create a copy of your final topology from yesterday's lab to use for today's lab.
 
-- First, activate the DNS role on Windows Server using Server Manager.
-- Next, you'll need to point your network hosts to it as their DNS server. Configure pfSense to assign the DNS server for LAN hosts to use this Windows Server's IP address if possible; otherwise, you can manually assign DNS server IP via the Windows Server/Windows 10 network adapter settings.
-- Verify that all devices have working DNS through Windows Server and can browse the internet.
-- Test your DNS is working by applying a forward lookup zone. Create a new forward lookup that causes http://admin.globexpower.com to resolve as the IP address of pfSense.
+2. Then read through the entire lab and use Draw.io to modify the topology of the network to reflect the changes and additions you expect to make. Include details like computer names, OS types, IP Addresses, etc., and also start to include Domain information. Include a screenshot of this initial topology.
+
 
 ### Part 2: Active Directory
 
-Activate AD DS role on Windows Server.
+1. First, install the Active Directory Domain Services server role on the Windows Server
 
-- Install server roles:
-  - Active Directory Domain Services.
-- Promote this server to a Domain Controller.
-- Add a new forest. It's OK if your forest only has one tree.
-  - Create a local domain using `corp.globexpower.com` as the root domain name.
-- Set a DSRM password.
-- Set the NetBIOS name to `CORP`.
+2. Once installation of AD DS is complete, you'll see an alert in the upper right-hand corner prompting you to promote this server to Domain Controller
 
-### Part 3: BgInfo
+    - Select "Add a new forest" and use `corp.globex.com` as the root domain name
 
-Next, let's set up a software tool that reveals useful information about the computer.
+    - Set a DSRM password, and record it in your notes
 
-- On Windows Server VM, download and install [BgInfo](https://docs.microsoft.com/en-us/sysinternals/downloads/bginfo){:target="_blank"} from Microsoft Sysinternals.
-- Run BgInfo and configure it to your liking.
-- Set BgInfo to automatically run on login.
-- Include a screenshot of your desktop in today's submission and mention how you got it to auto-run.
+    - Set the NetBIOS name to `CORP`
 
-> Consider deploying BgInfo to all your Windows VMs; it can save you time by posting all that valuable system information up front instead of hiding it behind menus or terminal commands.
+    - Leave all other setting at their default values, ignore and warnings about DNS, install and reboot
 
-### Part 4: Topology
+### Part 3: Join Endpoint to Domain
 
-Update your network topology diagram with any changes made to your network.
+Join your Windows 10 endpoint to the domain. This can be done a number of ways. See this resource for details: [Join Windows 10 to a Domain](https://www.itechguides.com/join-windows-10-to-domain/){:target="_blank"}
+
+- Use the domain name `CORP.GLOBEX.COM`
+
+- Authenticate with the username 'administrator' and the DSRM password you set in Part 2.
+
+### Part 4: AD Profile Creation & Login
+
+
+
+1. Optional: in Windows 10, open "Manage optional features" in Settings and install "RSAT: Active Directory Domain Services and LIghtweight Directory Services Tools". This will allow you to manage users and groups remotely from the Windows 10 endpoint instead of from the server itself.
+
+    - Configure ADAC to authenticate into the Windows Server.
+
+2. Using ADAC on either Windows Server or the domain-joined Windows 10 endpoint create the below users with the provided profile information:
+  - Francis Hopkins, Sr. Account Executive, Sales Department, GlobeX USA
+  - Amanda Williams, HR Specialist, HR, GlobeX USA
+  - Jim Sanders, HR Manager, HR, GlobeX USA
+  - Rita Morgan, CFO, Finance, GlobeX USA
+  - Yourself, Systems Administrator, GlobeX USA
+
+3. Create Organizational Units by department, and move the profiles into the appropriate OU
+
+4. Test that all profiles may login to the Windows 10 endpoint
+ 
+### Part 5: Topology 2
+
+When the other tasks are complete, review the topology and update, revise, extend, or add details as necessary.
+
+Was your initial topology accurate to the finished product? Why or why not?
 
 ## Stretch Goals (Optional Objectives)
 
