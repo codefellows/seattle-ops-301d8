@@ -1,4 +1,4 @@
-# Lab: Windows Server and Domain Controller
+# Lab: Windows Server and DNS
 
 ## Overview
 
@@ -89,11 +89,13 @@ But in order for AD and DC to function properly, we'll need to configure Windows
 1. First we will activate the DNS role on Windows Server and test it locally:
 
     - Activate the DNS role on Windows Server using Server Manager
+  
+    - In the DNS Manager, 
 
     - In Windows Server, change the DNS address to 127.0.0.1, so that Windows Server will use itself for DNS resolution
 
-    - Test your DNS is working by applying a forward lookup zone:
-        - Create a new forward lookup that causes admin.globex.com to resolve as the IP address of pfSense
+    - Test your DNS is working by configuring DNS in the WIndows Server to resolve 'admin.globex.com' as the IP address of pfSense:
+        - Create a new Primary Forward Lookup Zone called `globex.com`, then within that zone create a New Host called `corp` associated with the IP address of pfSense
         - Test that lookup zone by running `nslookup admin.globex.com` in the command line -- it should resolve as the address of pfSense
         - Use Internet Expolorer to navigate to http://admin.globex.com -- IE can be a little difficult, but if it works you should see pfSense load with a big red error warning you of a "Potential DNS rebind attack"
     
