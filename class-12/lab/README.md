@@ -14,7 +14,9 @@ As part of your project to transition GlobeX from Workgroup to Domain, the next 
 
 - VMs from Lab12:
   - Windows 2019 Server with DNS enabled
-  - pfSense configured to share the Windows Server's static IP as the DNS server along with DHCP lease information
+  - pfSense
+    - Configured to assign Windows Server a static IP
+    - Configured to share the Windows Server's static IP as the DNS server along with DHCP lease information
   - Windows 10 endpoint configured with the Windows Server as its DNS
 
 ## Objectives
