@@ -1,60 +1,80 @@
-# Lab: Active Directory 
+# Lab: Group Policy
 
 ## Overview
 
-ADAC (Active Directory Administrative Center) facilitates the convenient administration of user profiles from any Windows endpoint that can achieve connectivity with the DC. This application acts as a user identity control panel capable of many tasks ranging from user creation to simple password changes.
-
-In order to issue group policy and allow users of Windows endpoints to access their AD profile, you'll need to join those endpoints to the domain.
+Systems administrations can use OUs (Organizational Units) and GPOs (Group Policy Objects) to apply computer configurations to specific departments or teams in the organization. Group policy can be used to protect user data by applying folder redirection to the Windows user files.
 
 ## Scenario
 
-The project to transition GlobeX to a domained system was originally motivated by a need to standardize computer configurations across the organization. The next task is to join GlobeX endpoints to the new DC.
+After a junior IT support technician accidentally deleted user data yesterday afternoon on a marketing executive's computer, management at GlobeX wishes to know how you intend to backup user profile data on Windows 10 endpoints to prevent such incidents in the future. 
+
+## Prerequisites
+
+- VMs configured in Lab 12:
+  - pfSense
+    - Configured to assign Windows Server a static IP
+    - Configured to share the Windows Server's static IP as the DNS server along with DHCP lease information
+   
+
+- VMs configured in Lab 13:
+  - Windows Server 2019, promoted to Domain Controller of `corp.globex.com`
+    - Users and OUs created in ADAC
+  - A Windows 10 endpoint joined to the domain, with a domain user logged in
 
 ## Objectives
 
-- Join the Windows 10 endpoint to the newly-created domain
-- Configure ADAC on the Windows 10 endpoint for use by the systems administrator
-- Create the following user accounts on ADAC
-  - Francis Hopkins, Sr. Account Executive, Sales Department, GlobeX USA
-  - Amanda Williams, HR Specialist, HR, GlobeX USA
-  - Jim Sanders, HR Manager, HR, GlobeX USA
-  - Rita Morgan, CFO, Finance, GlobeX USA
-  - Yourself, Systems Administrator, GlobeX USA
-- Create OUs by department.
-- Sign into the Windows 10 endpoint using each AD profile
+- Create a GPO that redirects user's Pictures folder to a shared folder on the Windows Server
+- Validate the GPO works as expected to replicate a picture file to your Windows Server file share
 
 ## Resources
 
-- [Microsoft Documentation - Active Directory Administrative Center](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/adac/active-directory-administrative-center){:target="_blank"}
-- [Join Windows 10 to a Domain](https://www.itechguides.com/join-windows-10-to-domain/){:target="_blank"}
+- [Group Policy Planning and Deployment Guide](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc754948(v=ws.10)){:target="_blank"}
+- [Back to Basics: Groups vs Organizational Units in Active Directory](http://techgenix.com/back-basics-groups-vs-organizational-units-active-directory/){:target="_blank"}
+- [Configuring Folder Redirection through Group Policy](https://medium.com/tech-jobs-academy/configuring-folder-redirection-through-group-policy-b38d1faeb833)
+- [Video: Folder Redirection with Group Policy](https://www.youtube.com/watch?v=UY2l1uEGGbM){:target="_blank"}
 
 ## Tasks
 
-### Part 1: Join Endpoint to Domain
+> There are no topology tasks in this lab, since there are no changes to the network configuration or domain status of any of our VMs.
 
-Join your Windows 10 endpoint to the domain. This can be done a number of ways. Here is one method:
-- This can be done from the This PC > Properties menu. Right click "This PC" in Windows Explorer and select Properties to access this menu.
-- Locate the button "Change..." under Computer Name tab.
-- Here under "Member of" section you can toggle into the Domain option and type the name of your domain. If you encounter errors, try entering the FQDN of your domain.
-- Windows will then prompt you to authenticate as CORP\Administrator (or whoever you've set as the domain administrator).
-- Windows will then prompt you to reboot to finalize the domain join procedure.
+> If you would like to follow along with a video, chekc out [Video: Folder Redirection with Group Policy](https://www.youtube.com/watch?v=UY2l1uEGGbM), linked above in the resources.
 
-### Part 2: AD Profile Creation & Login
+### Part 1: File Share
 
-- Install RSAT on the Windows 10 endpoint.
-- Configure ADAC to authenticate into the Windows Server.
-- In ADAC create the below users with the provided profile information.
-  - Francis Hopkins, Sr. Account Executive, Sales Department, GlobeX USA
-  - Amanda Williams, HR Specialist, HR, GlobeX USA
-  - Jim Sanders, HR Manager, HR, GlobeX USA
-  - Rita Morgan, CFO, Finance, GlobeX USA
-  - Yourself, Systems Administrator, GlobeX USA
-- Create OUs by department.
-- Test that all profiles may login to the Windows 10 endpoint.
+First you'll need to create a file share on Windows Server:
 
-### Part 3: Topology
+1. In C:\ on the Windows Server, create a folder caller 'GlobexShare' (file path should be `C:\GlobexShare`)
 
-Update your network topology diagram with any changes made to your network.
+2. To share this folder, go to Properties > Sharing > Advanced Sharing > Permissions, select 'Everyone' and check the 'Full Control' box, then apply the changes
+
+3. Confirm that the share address of this folder is `\\server-name\GlobexShare`, where `server-name` is the computer name of your Windows Server
+  
+4. Test this file share by accessing `\\server-name\GlobexShare` from the Windows 10 endpoint
+
+### Part 2: GPO Creation
+
+This part uses Group Policy Management Console (GPMC) to create a Group Policy Object (GPO) which will redirect all domain user's Pictures folders to the shared folder on the Windows Server. We will initially test this on users in only one OU before we roll it out to all employees.
+
+1. Open GPMC in the Windows Server and create a new GPO linked to only one of the Organizational Units you created in Lab12 in the `corp.globex.com` domain
+
+2. Open the Group Policy Editor for that new GPO and configure the User's Pictures folder to redirect to the network address of the shared folder you created in Part 1
+
+
+### Part 2: Policy Push & Testing
+
+Now we will test that our GPO is working as intended, and that it only applies to the users in the OU we link it to. Once we are successful, we will link the GPO to all users in the domain.
+
+1. On your Windows 10 endpoint, run `gpupdate` to apply the the new Group Policy, then log out and log back in as a user from the associated OU for the GPO to take effect
+
+    - Confirm that a folder for that user has appeared in the GlobexShare folder on the Windows Server (you should also see a little green badge on the Pictures folder for that user on the Windows 10 endpoint)
+
+> Note: Group Policies are not applied instantly, but only update periodically, usually every 60-90 minutes. If you're having trouble, trying running `gpupdate /force` on the endpoint, and/or try rebooting instead of just logging in and out.
+
+2. Now try logging in as a user from a different OU -- is a folder created on the Server? Why or why not?
+
+3. If everything else has been successful, link the GPO to the whole domain so that it will apply to all domain users
+
+4. Update the Group Policy on the endpoint and log in to different users until you are satisfied that it is working for users of all OUs
 
 ## Submission Instructions
 
