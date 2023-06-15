@@ -18,7 +18,7 @@ After performing your initial survey of GlobeX systems, you gather that the comp
 - Deploy Windows Server 2019 as a VM to your local VirtualBox Manager and add it to your network
 - Assign the VM a static IP using DHCP reservation on your pfSense VM
 - Verify connectivity from Windows Server to Windows 10 and to the internet
-- 
+- Create a DNS entry in the forward lookup zone that changes how a domain name resolves
 - Create a professional network topology diagram that reflects your current deployments
 
 ## Resources
