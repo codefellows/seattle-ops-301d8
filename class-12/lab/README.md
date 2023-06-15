@@ -12,7 +12,7 @@ As part of your project to transition GlobeX from Workgroup to Domain, the next 
 
 ## Prerequisites
 
-- VMs from Lab12:
+- VMs configured in Lab 12:
   - Windows 2019 Server with DNS enabled
   - pfSense
     - Configured to assign Windows Server a static IP
