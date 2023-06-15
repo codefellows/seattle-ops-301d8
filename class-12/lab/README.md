@@ -10,6 +10,13 @@ The GlobeX CEO has requested that endpoint configuration be centrally administer
 
 As part of your project to transition GlobeX from Workgroup to Domain, the next step is to configure the new Windows Server so that it can perform these critical roles on the GlobeX network, then start creating users and joining endpoints to the domain.
 
+## Prerequisites
+
+- VMs from Lab12:
+  - Windows 2019 Server with DNS enabled
+  - pfSense configured to share the Windows Server's static IP as the DNS server along with DHCP lease information
+  - Windows 10 endpoint configured with the Windows Server as its DNS
+
 ## Objectives
 
 - Add the AD DS role to your Windows Server
