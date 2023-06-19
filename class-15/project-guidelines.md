@@ -73,18 +73,23 @@ Technical merit of the project overall is evaluated according the requirements. 
 
 Components of the presentation must include:
 
-#### Team members individually introduce themselves. (5 min)
+#### Team members individually introduce themselves. (2-5 min)
 - One interesting/fun fact about yourself
 - Your career ambitions (where you've been, where you're going, and why)
-#### Topical Overview (5 min)
+#### Topical Overview (2-5 min)
 - As the "Problem Domain", describe the project scenario you were assigned and the overall client requirements.
 - What solutions to the problem domain will your team be presenting today? Why did you choose these solutions?
 - Explain and define any key terms you use, such as DNS, DHCP, Static IP. Your audience is both technical and non-technical, and they need to be able to follow along with your presentation.
-#### Improvements made to network infrastructure to accommodate remote employees and site-to-site connectivity (5 min)
-- Implementation of virtual private networking (VPN) and demonstrate successful resource access
+#### Technical Demonstration of network infrastructure and Domain Services (8-12 min)
+- A secure Virtual Private Cloud on AWS, hosting corporate Globex resources
+- Implementation of virtual private networking (VPN)
+  - Demonstration of successful remote access of remote cloud services
 - Network access controls system
   - How does your system achieve AAA network security management principles?
-#### Final thoughts on how the project went (5 min)
+  - How do you secure access to your cloud resources?
+- Automation, documentation, and templating to facilitate quick and consistent deployment
+- A domain joined local endpoint, subject to security guidelines and group policy dictated by the Domain Controller
+#### Final thoughts on how the project went (2 min)
 - The team's approach to planning and communication throughout the project
 - A technical obstacle or two and how those obstacles were overcome
 - A portion of the outcome that each team member is particularly proud of
